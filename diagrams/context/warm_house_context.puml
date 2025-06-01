@@ -1,0 +1,21 @@
+@startuml
+title FitLife Context Diagram
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы умный дом")
+Person(admin, "Администратор", "Администрирование системы")
+
+System(WarmHouseSystem, "Система умный дом", "Система управления отоплением, светом, наблюдением и воротами")
+
+System_Ext(DeviceManagementApi, "api для управления устройствами")
+System_Ext(DeviceConnectingApi, "api для подключения новых устройств")
+
+Rel(user, WarmHouseSystem, "Пользуется системой")
+Rel(admin,WarmHouseSystem,"Администрирует систему")
+Rel(WarmHouseSystem,DeviceManagementApi,"Извлекает данные о устройствах")
+Rel(DeviceConnectingApi, WarmHouseSystem,"Вносит в систему новые устройства")
+
+@enduml
