@@ -10,8 +10,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: smarthome
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     networks:
       - smarthome-network
 
