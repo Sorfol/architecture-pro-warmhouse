@@ -7,7 +7,13 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: smarthome
+      volumes:
+        - postgres-data:/var/lib/postgresql/data
+      networks:
+        - smarthome-network
 
   temperature-api:
     build:
