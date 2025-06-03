@@ -12,6 +12,11 @@ services:
       POSTGRES_DB: smarthome
     networks:
       - smarthome-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   temperature-api:
     build:
