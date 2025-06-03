@@ -5,9 +5,9 @@ services:
     image: postgres:16-alpine
     container_name: smarthome-postgres
     ports:
-      - "5000:5000"
+      - "5432:5432"
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/smarthome
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
 
   temperature-api:
     build:
