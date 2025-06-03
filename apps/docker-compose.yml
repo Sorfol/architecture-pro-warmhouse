@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile
     container_name: temperature-api
     ports:
-      - "8080:8081"
+      - "8081:8081"
     restart: unless-stopped
     networks:
       - smarthome-network
