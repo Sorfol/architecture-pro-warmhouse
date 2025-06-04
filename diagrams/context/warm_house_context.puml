@@ -1,5 +1,5 @@
 @startuml
-title FitLife Context Diagram
+title Warm house диаграмма контекста
 
 top to bottom direction
 
@@ -11,11 +11,9 @@ Person(admin, "Администратор", "Администрирование 
 System(WarmHouseSystem, "Система умный дом", "Система управления отоплением, светом, наблюдением и воротами")
 
 System_Ext(DeviceManagementApi, "api для управления устройствами")
-System_Ext(DeviceConnectingApi, "api для подключения новых устройств")
 
 Rel(user, WarmHouseSystem, "Пользуется системой")
 Rel(admin,WarmHouseSystem,"Администрирует систему")
 Rel(WarmHouseSystem,DeviceManagementApi,"Извлекает данные о устройствах")
-Rel(DeviceConnectingApi, WarmHouseSystem,"Вносит в систему новые устройства")
 
 @enduml

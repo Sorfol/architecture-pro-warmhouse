@@ -1,0 +1,27 @@
+@startuml
+title Warm house диаграмма контекста
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы умный дом")
+Person(admin, "Администратор", "Администрирование системы")
+
+System(WarmHouseSystem, "Система умный дом")
+Container_Boundary(WarmHouseSystem, "Система умный дом") {
+  Container(WebApp, "Веб приложение", "Java, Spring", "Управляет взаимодействием с пользователем")
+  Container(AdminConsole, "Консоль администратора", "Java, Spring", "Управляет данными пользователей и мониторинг")
+  Container(WarmHouseApp, "Приложение умный дом", "Java, Spring", "Система управления отоплением, светом, наблюдением и воротами")
+  Container(Database, "Database", "PostgreSQL", "Хранит данные о пользователях и устройствах")
+}
+
+Rel(user, WebApp, "Пользуется системой")
+Rel(admin,AdminConsole,"Администрирует систему")
+Rel(WebApp,WarmHouseApp,"Вносит желаемые параметры")
+Rel(WarmHouseApp,WebApp,"Считывает показания датчиков")
+Rel(WebApp,WarmHouseApp,"Добавляет новые датчики")
+Rel(WarmHouseApp,AdminConsole,"Мониторит показатели и статистики")
+Rel(AdminConsole,WarmHouseApp,"Вносит корректировки")
+Rel(WarmHouseApp,Database,"Сохраняет данные в базу")
+@enduml

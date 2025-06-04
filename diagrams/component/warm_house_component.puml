@@ -1,0 +1,37 @@
+@startuml
+title Warm house диаграмма контекста
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+Container_Boundary(DatabaseContainer, "Database container") {
+  Container(Database, "Database", "PostgreSQL", "Хранит пользовательские данные")
+}
+
+Container(WebApp, "Web Application", "Java, Spring") {
+
+  Component(Iam, "IAM service", "Identity and Access Management")
+  Component(Proxy, "Proxy", "proxy service")
+  Component(HeatingController, "Heating Controller", "Управление отоплением")
+  Component(LightController, "Light Controller", "Управление светом")
+  Component(VideoSurveillance, "Video Surveillance", "Видеонаблюдение")
+  Component(GateController, "Gate Controller", "Управление воротами")
+
+  Component(ServiceLayer, "Service Layer", "Business logic")
+  Component(RepositoryLayer, "Repository Layer", "Data access logic")
+}
+
+Rel(Iam,Proxy,"Передача запроса")
+Rel(Proxy,HeatingController,"Вызов сервиса api")
+Rel(Proxy,LightController,"Вызов сервиса api")
+Rel(Proxy,VideoSurveillance,"Вызов сервиса api")
+Rel(Proxy,GateController,"Вызов сервиса api")
+
+Rel(LightController,ServiceLayer,"Вызов бизнес логики")
+Rel(HeatingController,ServiceLayer,"Вызов бизнес логики")
+Rel(VideoSurveillance,ServiceLayer,"Вызов бизнес логики")
+Rel(GateController,ServiceLayer,"Вызов бизнес логики")
+Rel(ServiceLayer,RepositoryLayer,"Reads/Writes data")
+Rel(RepositoryLayer,Database,"Reads/Writes user data")
+@enduml
