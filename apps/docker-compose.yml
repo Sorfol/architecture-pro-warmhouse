@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   postgres:
@@ -11,8 +11,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: smarthome
     volumes:
-      - postgres_data:/var/lib/postgresql/data
       - ./smart_home/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - smarthome-network
     healthcheck:
