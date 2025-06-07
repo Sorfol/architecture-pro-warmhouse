@@ -1,0 +1,32 @@
+@startuml
+title Warm house диаграмма кода системы отопления
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+class User {
+  +Float id
+  +String name
+  +String email
+  +List<Thermostat> thermostats
+  +void register()
+  +void login()
+}
+
+class TemperatureController {
+  +Float getTemperature()
+  +void changeDesiredTemperature()
+}
+
+class Thermostat {
+  +Float id
+  +String location
+  +Double desiredTemperature
+  void changeTemperatureToDesired()
+}
+
+User "1" -- "0..*" TemperatureController : has
+TemperatureController "1" -- "0..*" Thermostat : has
+
+@enduml

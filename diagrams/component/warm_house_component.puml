@@ -1,5 +1,5 @@
 @startuml
-title Warm house диаграмма контекста
+title Warm house диаграмма компонентов
 
 top to bottom direction
 
