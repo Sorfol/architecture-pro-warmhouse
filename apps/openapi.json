@@ -1,0 +1,157 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Smart Home Sensor API",
+    "description": "A collection for testing the Smart Home Sensor Management API",
+    "version": "1.0.0"
+  },
+  "servers": [],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health Check"
+        ],
+        "summary": "Health Check",
+        "description": "Check if the API is running",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors": {
+      "get": {
+        "tags": [
+          "Get All Sensors"
+        ],
+        "summary": "Get All Sensors",
+        "description": "Retrieve all sensors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Create Sensor"
+        ],
+        "summary": "Create Sensor",
+        "description": "Create a new sensor",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Living Room Temperature",
+                  "type": "temperature",
+                  "location": "Living Room",
+                  "unit": "°C"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/1": {
+      "get": {
+        "tags": [
+          "Get Sensor by ID"
+        ],
+        "summary": "Get Sensor by ID",
+        "description": "Retrieve a specific sensor by ID",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Update Sensor"
+        ],
+        "summary": "Update Sensor",
+        "description": "Update an existing sensor",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Updated Living Room Temperature",
+                  "type": "temperature",
+                  "location": "Living Room",
+                  "unit": "°C"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Delete Sensor"
+        ],
+        "summary": "Delete Sensor",
+        "description": "Delete a sensor",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/1/value": {
+      "patch": {
+        "tags": [
+          "Update Sensor Value"
+        ],
+        "summary": "Update Sensor Value",
+        "description": "Update a sensor's value and status",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "value": 22.5,
+                  "status": "active"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  }
+}
