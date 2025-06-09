@@ -148,6 +148,99 @@
           }
         }
       }
+    },
+    "/api/v2/sensors/1/value": {
+      "patch": {
+        "tags": [
+          "Update Sensor Value v2"
+        ],
+        "summary": "Update Sensor Value",
+        "description": "Update a sensor's value and status",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "value": 22.5,
+                  "status": "active"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/sensors": {
+      "get": {
+        "tags": [
+          "Get All Sensors v2"
+        ],
+        "summary": "Get All Sensors",
+        "description": "Retrieve all sensors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Create Sensor"
+        ],
+        "summary": "Create Sensor",
+        "description": "Create a new sensor",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/temperature-sensor/1/value": {
+      "get": {
+        "tags": [
+          "Get temperature-sensor value"
+        ],
+        "summary": "Get temperature sensor value by id",
+        "description": "Get temperature sensor value by id",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Set desired temperature"
+        ],
+        "summary": "Set desired temperature",
+        "description": "Set desired temperature",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
     }
   },
   "components": {
