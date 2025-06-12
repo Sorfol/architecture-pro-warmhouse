@@ -19,6 +19,7 @@
     <modules>
         <module>temperature-api</module>
         <module>proxy</module>
+        <module>gate-service</module>
     </modules>
 
 </project>

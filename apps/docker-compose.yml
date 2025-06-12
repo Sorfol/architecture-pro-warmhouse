@@ -31,6 +31,28 @@ services:
     networks:
       - smarthome-network
 
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
+
+  gate_service:
+    build:
+      context: ./gate_service
+      dockerfile: Dockerfile
+    container_name: gate_service
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
+
   app:
     build:
       context: ./smart_home
