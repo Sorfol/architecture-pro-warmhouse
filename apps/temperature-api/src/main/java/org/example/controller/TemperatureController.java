@@ -9,24 +9,23 @@ public class TemperatureController {
     private final Random random = new Random();
 
     @GetMapping("/temperature")
-    public TemperatureResponse getTemperatureByLocation(
+    public double getTemperatureByLocation(
             @RequestParam(required = false) String location) {
 
         String sensorID = determineSensorIdByLocation(location);
         double temperature = generateTemperature();
-        return buildResponse(location, sensorID, temperature);
+        return generateTemperature();
     }
 
     @GetMapping("/temperature/{sensorID}")
-    public TemperatureResponse getTemperatureBySensorId(
+    public double getTemperatureBySensorId(
             @PathVariable String sensorID,
             @RequestParam(required = false) String location) {
 
         if (location == null) {
             location = determineLocationBySensorId(sensorID);
         }
-        double temperature = generateTemperature();
-        return buildResponse(location, sensorID, temperature);
+        return generateTemperature();
     }
 
     private double generateTemperature() {
