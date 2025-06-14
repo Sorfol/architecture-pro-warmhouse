@@ -4,12 +4,14 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: v1-routing
-          uri: http://localhost:8080
-          predicates:
-            - Path=/api/v1/**
-        - id: v2-routing
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/v2/**
+      server:
+        webflux:
+          routes:
+            - id: v1-routing
+              uri: http://localhost:8080
+              predicates:
+                - Path=/api/v1/**
+            - id: v2-routing
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v2/**
