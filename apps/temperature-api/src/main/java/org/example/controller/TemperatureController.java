@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -17,7 +18,7 @@ public class TemperatureController {
         return buildResponse(location, sensorID, temperature);
     }
 
-    @GetMapping("/temperature/{sensorID}")
+    @GetMapping(value = "/temperature/{sensorID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TemperatureResponse getTemperatureBySensorId(
             @PathVariable String sensorID,
             @RequestParam(required = false) String location) {
