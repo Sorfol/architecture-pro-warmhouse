@@ -7,18 +7,20 @@ import java.time.LocalDateTime;
 
 @Getter
 public class TemperatureResponse {
+    @JsonProperty
     private double value;
+    @JsonProperty
     private String unit;
     private LocalDateTime timestamp;
+    @JsonProperty
     private String location;
+    @JsonProperty
     private String status;
-
     @JsonProperty("sensor_id")
     private String sensorId;
-
     @JsonProperty("sensor_type")
     private String sensorType;
-
+    @JsonProperty
     private String description;
 
     // Конструктор
