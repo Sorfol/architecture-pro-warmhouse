@@ -1,5 +1,8 @@
 #!/bin/bash
 
+docker compose down
+git pull
+
 # Exit on any error
 set -e
 
