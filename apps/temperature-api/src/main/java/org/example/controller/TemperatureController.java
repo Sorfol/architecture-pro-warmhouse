@@ -31,7 +31,7 @@ public class TemperatureController {
     }
 
     private double generateTemperature() {
-        return (60 * random.nextDouble()) - 20;
+        return Math.round((60 * random.nextDouble()) - 20 * 10) / 10.0;
     }
 
     private TemperatureResponse buildResponse(String location, String sensorID, double temperature) {
