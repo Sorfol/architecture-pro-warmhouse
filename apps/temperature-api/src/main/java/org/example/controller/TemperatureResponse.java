@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -11,20 +12,26 @@ public class TemperatureResponse {
     private LocalDateTime timestamp;
     private String location;
     private String status;
-    private String sensor_id;
-    private String sensor_type;
+
+    @JsonProperty("sensor_id")
+    private String sensorId;
+
+    @JsonProperty("sensor_type")
+    private String sensorType;
+
     private String description;
 
+    // Конструктор
     public TemperatureResponse(double value, String unit, LocalDateTime timestamp,
-                               String location, String status, String sensor_id,
-                               String sensor_type, String description) {
+                               String location, String status, String sensorId,
+                               String sensorType, String description) {
         this.value = value;
         this.unit = unit;
         this.timestamp = timestamp;
         this.location = location;
         this.status = status;
-        this.sensor_id = sensor_id;
-        this.sensor_type = sensor_type;
+        this.sensorId = sensorId;
+        this.sensorType = sensorType;
         this.description = description;
     }
 
