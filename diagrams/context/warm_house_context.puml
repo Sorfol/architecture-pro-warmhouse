@@ -1,0 +1,19 @@
+@startuml
+title Warm house диаграмма контекста
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы умный дом")
+Person(admin, "Администратор", "Администрирование системы")
+
+System(WarmHouseSystem, "Система умный дом", "Система управления отоплением, светом, наблюдением и воротами")
+
+System_Ext(DeviceManagementApi, "api для управления устройствами")
+
+Rel(user, WarmHouseSystem, "Пользуется системой")
+Rel(admin,WarmHouseSystem,"Администрирует систему")
+Rel(WarmHouseSystem,DeviceManagementApi,"Извлекает данные о устройствах")
+
+@enduml

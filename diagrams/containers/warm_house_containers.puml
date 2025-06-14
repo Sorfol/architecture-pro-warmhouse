@@ -1,0 +1,50 @@
+@startuml
+title Warm house диаграмма контейнеров
+
+top to bottom direction
+
+!include ../templates/C4_Component.puml
+
+Person(user, "Пользователь", "Пользователь системы умный дом")
+Person(admin, "Администратор", "Администрирование системы")
+
+System(WarmHouseSystem, "Система умный дом")
+Container_Boundary(WarmHouseSystem, "Система умный дом") {
+  Container(WebApp, "Веб приложение", "Java, Spring", "Управляет взаимодействием с пользователем")
+  Container(AdminConsole, "Консоль администратора", "Java, Spring", "Управляет данными пользователей и мониторинг")
+
+
+  Container(AuthService, "Сервис аутентификации", "Java, Spring", "Управление пользователями и доступом")
+  Container(GateService, "Управление воротами", "Java", "Контроль состояния ворот")
+  Container(LightService, "Управление светом", "Node.js", "Контроль освещения в доме")
+  Container(HeatingService, "Управление отоплением", "Java", "Контроль температуры в помещениях")
+  Container(SensorService, "Управление датчиками", "Java", "Сбор данных с датчиков")
+
+  Container(Database, "Database", "PostgreSQL", "Хранит данные о пользователях и устройствах")
+  Container(MessageBroker, "Брокер сообщений", "RabbitMQ", "Обмен данными между сервисами")
+}
+
+Rel(user, WebApp, "Пользуется системой")
+Rel(admin,AdminConsole,"Администрирует систему")
+
+Rel(WebApp, AuthService, "Аутентификация")
+Rel(AuthService, Database, "Хранит данные пользователей")
+
+Rel(WebApp, GateService, "Управление воротами")
+Rel(WebApp, LightService, "Управление светом")
+Rel(WebApp, HeatingService, "Управление отоплением")
+
+Rel(SensorService, GateService, "Данные датчиков ворот")
+Rel(SensorService, LightService, "Данные датчиков света")
+Rel(SensorService, HeatingService, "Данные температурных датчиков")
+
+Rel(SensorService, Database, "Сохраняет данные датчиков")
+Rel(HeatingService, Database, "Сохраняет настройки отопления")
+
+Rel(AdminConsole, SensorService, "Мониторинг показателей")
+Rel(AdminConsole, HeatingService, "Корректировка настроек")
+Rel(AdminConsole, MessageBroker, "Получение системных событий")
+
+Rel_Back(MessageBroker, SensorService, "Публикация данных")
+Rel(MessageBroker, HeatingService, "Команды управления")
+@enduml
