@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
 import java.util.Random;
 
 @RestController
@@ -9,23 +9,24 @@ public class TemperatureController {
     private final Random random = new Random();
 
     @GetMapping("/temperature")
-    public double getTemperatureByLocation(
+    public TemperatureResponse getTemperatureByLocation(
             @RequestParam(required = false) String location) {
 
         String sensorID = determineSensorIdByLocation(location);
         double temperature = generateTemperature();
-        return generateTemperature();
+        return buildResponse(location, sensorID, temperature);
     }
 
     @GetMapping("/temperature/{sensorID}")
-    public double getTemperatureBySensorId(
+    public TemperatureResponse getTemperatureBySensorId(
             @PathVariable String sensorID,
             @RequestParam(required = false) String location) {
 
         if (location == null) {
             location = determineLocationBySensorId(sensorID);
         }
-        return generateTemperature();
+        double temperature = generateTemperature();
+        return buildResponse(location, sensorID, temperature);
     }
 
     private double generateTemperature() {
@@ -34,15 +35,19 @@ public class TemperatureController {
 
     private TemperatureResponse buildResponse(String location, String sensorID, double temperature) {
         return new TemperatureResponse(
+                temperature,
+                "C",
+                LocalDateTime.now(),
                 location != null ? location : "Unknown",
+                "OK",
                 sensorID != null ? sensorID : "0",
-                Math.round(temperature * 10) / 10.0
+                "digital",
+                "Current temperature"
         );
     }
 
     private String determineLocationBySensorId(String sensorID) {
         if (sensorID == null) return "Unknown";
-
         return switch (sensorID) {
             case "1" -> "Living Room";
             case "2" -> "Bedroom";
@@ -53,7 +58,6 @@ public class TemperatureController {
 
     private String determineSensorIdByLocation(String location) {
         if (location == null) return "0";
-
         return switch (location) {
             case "Living Room" -> "1";
             case "Bedroom" -> "2";
